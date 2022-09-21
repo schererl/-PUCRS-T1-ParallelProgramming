@@ -57,7 +57,7 @@ Para o problema proposto, existem três etapas do processo que podem ser paralel
 testes prévios **exemplo**:
 
 *Tabela de resutados*
-BUDGET|THREADS|TIPO ESCALONAMENTOTEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
+BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
 --- | --- | --- | --- | --- |--- |
 10000|1|41.15 s|dinâmico|[0.002, 0.009]|10|
 10000|2|20.61 s|dinâmico|[0.002, 0.009]|10|
