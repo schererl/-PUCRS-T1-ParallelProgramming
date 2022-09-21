@@ -48,14 +48,17 @@ Para o problema proposto, existem três etapas do processo que podem ser paralel
 
   * **Paralelismo de Simulação** Cada thread executa uma parte do budget destinado para cada ação de forma independente.
 
+* Discussão de possibilidade de escalonadores a serem usados:
+**ler sobre os tipos escalonadores da aula**
+
 
 ## Paralelismo de Ação
 
 testes prévios **exemplo**:
 
 *Tabela de resutados*
-BUDGET|THREADS|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
---- | --- | --- | --- |--- |
-10000|1|41.15 s|[0.002, 0.009]|10|
-10000|2|20.61 s|[0.002, 0.009]|10|
-10000|4|20.61 s|[0.002, 0.009]|10|
+BUDGET|THREADS|TIPO ESCALONAMENTOTEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
+--- | --- | --- | --- | --- |--- |
+10000|1|41.15 s|dinâmico|[0.002, 0.009]|10|
+10000|2|20.61 s|dinâmico|[0.002, 0.009]|10|
+10000|4|20.61 s|dinâmico|[0.002, 0.009]|10|
