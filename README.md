@@ -57,7 +57,9 @@ Para o problema proposto, existem três etapas do processo que podem ser paralel
 testes prévios **exemplo**:
 
 *Tabela de resutados*
-folha
+
+**paralelismo de folha**
+
 BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
 --- | --- | --- | --- | --- |--- |
 40000|1|164.50 s|dinâmico|[0.002m 0.009]|[10]
@@ -68,7 +70,8 @@ BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇ
 40000|8|20.66 s|dinâmico|[0.002m 0.009]|[10]
 40000|16|10.38 s|dinâmico|[0.002m 0.009]|[10]
 
-ação
+**paralelismo de ação**
+
 BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
 --- | --- | --- | --- | --- |--- |
 40000|1|164.50 s|dinâmico|[0.002m 0.009]|[10]
@@ -79,14 +82,26 @@ BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇ
 40000|8|49.64 s|dinâmico|[0.002m 0.009]|[10]
 40000|16|44.27 s|dinâmico|[0.002m 0.009]|[10]
 
-folha grão 100
-BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
---- | --- | --- | --- | --- |--- |
-40000|1|164.50 s|dinâmico|[0.002m 0.009]|[10]
-40000|2|82.45 s|dinâmico|[0.002m 0.009]|[10]
-40000|3|54.89 s|dinâmico|[0.002m 0.009]|[10]
-40000|4|41.27 s|dinâmico|[0.002m 0.009]|[10]
-40000|6|27.53 s|dinâmico|[0.002m 0.009]|[10]
-40000|8|20.66 s|dinâmico|[0.002m 0.009]|[10]
-40000|16|15.61 s|dinâmico|[0.002m 0.009]|[10]
+**alterações na carga:**
 
+* grão 2 (folha):
+  - 4 threads 41.28s
+  - 8 threads 20.71s  
+  - 16 threads 10.43s
+  
+* grão 2 (ação):
+  - 4 threads 98.68 s
+  - 8 threads 87.96 s
+  - 16 threads 87.99 s
+
+* grão 10 (folha):
+  - 4 threads 41.59s
+  - 8 threads 21.04s
+  - 16 threads 10.80s
+
+* grão 100 (folha):
+  - 4 threads 44.68s
+  - 8 threads 26.83s
+  - 16 threads 15.61s
+
+  
