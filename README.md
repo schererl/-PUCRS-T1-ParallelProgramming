@@ -54,11 +54,34 @@ Para o problema proposto, existem três etapas do processo que podem ser paralel
 
 ## Paralelismo de Ação
 
-testes prévios **exemplo**:
+O paralelismo de ação consiste em dividir as ações, destinando uma ou um conjunto delas para as threads disponíveis. Avaliaremos o ganho de desempenho da aplicação aumentando gradativamente o número de threads. 
 
-*Tabela de resutados*
+A tabela abaixo mostra a execução do programa variando o número de threads no conjunto {1,2,4,6,8,16}. Os testes foram executados no LAD por uma máquina com 8/16 núcleos.
 
-**paralelismo de folha**
+BUDGET|THREADS|TEMPO EXECUÇÃO|TIPO ESCALONAMENTO|MC INTERVAL (sec)|NÚMERO AÇÕES|
+--- | --- | --- | --- | --- |--- |
+40000|1|164.50 s|dinâmico|[0.002m 0.009]|10|
+40000|2|87.85 s|dinâmico|[0.002m 0.009]|10|
+40000|4|65.83 s|dinâmico|[0.002m 0.009]|10|
+40000|6|49.52 s|dinâmico|[0.002m 0.009]|10|
+40000|8|49.64 s|dinâmico|[0.002m 0.009]|10|
+40000|16|44.27 s|dinâmico|[0.002m 0.009]|10|
+
+Perceba que o ganho de desempenho ocorre numa escala bem abaixo do esperado. A partir dos 4 cores já temos um desempenho, aproximadamente de 37% abaixo do esperado, o tempo de execução ideal estaria em torno de 41 segundos, ao invés de 65.83s. A partir das 6 threads a variação se torna muito pequena quando comparado ao que seria uma speed-up ideal.
+
+A explicação que acreditamos que esteja ocorrendo é devido a granularidade do problema ser muito grande. O paralelismo de ação divide as task de acordo com o número de ações a cada iteração do algoritmo. Como estamos fazendo um experimento estático, a primeira iteração sempre começará com um espaço de 10 ações, seguido de 5, 3, 2 e sai do laço quando sobrar apenas uma única melhor ação. O problema nesta forma de distribuir trabalho é que existe um número muito restrito de ações para se aplicar as simulações em paralelo e ainda a cada iteração esse número cai pela metade. Pegando o caso das 16 threads, já na primeira iteração, 6 recursos ficam sem trabalho, afinal o mínimo que o problema pode ser quebrado é em 10 ações, ao passo que, a medida que o espaço de ações diminui, o aproveitamento do paralelismo reduz ainda mais.
+
+O fato da execução em 2 threads ser a que mais se aproxima do speed-up ideal antes de ter uma queda abrupta. Perceba que no caso do nosso espaço de 10 ações, as duas threads consegue executar uma boa divisão de trabalho até sair do laço de convergencia do algoritmo. No momento que as duas últimas ações terminam suas simulações, a execução termina. A execução com 4 threads ainda consegue aproveitar todos os recurso até chegar no espaço com 3 ações, a partir dai, terá menos trabalho do que threads disponíveis.
+
+
+* grão 2 (ação):
+  - 4 threads 98.68 s
+  - 8 threads 87.96 s
+  - 16 threads 87.99 s
+  
+Seguindo está lógica da granularidade do problema do jeito que foi modelado estar muito grossa, testamos em seguida aumentar ainda mais a granularidade, ou seja, distribuir para cada task, mais de uma ação. Os resultados como é possível ver foram piores, o curioso nesta etapa foi perceber que aumentando a granularidade, o desempenho com 4,8 e 16 threads foi inferior ao de 2 threads com uma ação por task. Não ficou claro o porquê deste fenomeno, intuitivamente o que pensávamos seria que de fato o programa escalaria ainda menos com o número de threads. Talvez, aumentar o grão fez com que aumentassem o número de *miss* nas memórias cache, o que decai o desempenho da aplicação. 
+
+## Pralelismo de Folha
 
 BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
 --- | --- | --- | --- | --- |--- |
@@ -70,17 +93,6 @@ BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇ
 40000|8|20.66 s|dinâmico|[0.002m 0.009]|[10]
 40000|16|10.38 s|dinâmico|[0.002m 0.009]|[10]
 
-**paralelismo de ação**
-
-BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
---- | --- | --- | --- | --- |--- |
-40000|1|164.50 s|dinâmico|[0.002m 0.009]|[10]
-40000|2|87.85 s|dinâmico|[0.002m 0.009]|[10]
-40000|3|71.28 s|dinâmico|[0.002m 0.009]|[10]
-40000|4|65.83 s|dinâmico|[0.002m 0.009]|[10]
-40000|6|49.52 s|dinâmico|[0.002m 0.009]|[10]
-40000|8|49.64 s|dinâmico|[0.002m 0.009]|[10]
-40000|16|44.27 s|dinâmico|[0.002m 0.009]|[10]
 
 **alterações na carga:**
 
@@ -89,10 +101,7 @@ BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇ
   - 8 threads 20.71s  
   - 16 threads 10.43s
   
-* grão 2 (ação):
-  - 4 threads 98.68 s
-  - 8 threads 87.96 s
-  - 16 threads 87.99 s
+
 
 * grão 10 (folha):
   - 4 threads 41.59s
