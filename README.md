@@ -57,8 +57,9 @@ Para o problema proposto, existem três etapas do processo que podem ser paralel
 testes prévios **exemplo**:
 
 *Tabela de resutados*
+folha
 BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
-folha | --- | --- | --- | --- |--- |
+--- | --- | --- | --- | --- |--- |
 40000|1|164.50 s|dinâmico|[0.002m 0.009]|[10]
 40000|2|82.45 s|dinâmico|[0.002m 0.009]|[10]
 40000|3|54.89 s|dinâmico|[0.002m 0.009]|[10]
@@ -66,7 +67,10 @@ folha | --- | --- | --- | --- |--- |
 40000|6|27.53 s|dinâmico|[0.002m 0.009]|[10]
 40000|8|20.66 s|dinâmico|[0.002m 0.009]|[10]
 40000|16|10.38 s|dinâmico|[0.002m 0.009]|[10]
-ação | --- | --- | --- | --- |--- |
+
+ação
+BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
+--- | --- | --- | --- | --- |--- |
 40000|1|164.50 s|dinâmico|[0.002m 0.009]|[10]
 40000|2|87.85 s|dinâmico|[0.002m 0.009]|[10]
 40000|3|71.28 s|dinâmico|[0.002m 0.009]|[10]
@@ -74,7 +78,10 @@ ação | --- | --- | --- | --- |--- |
 40000|6|49.52 s|dinâmico|[0.002m 0.009]|[10]
 40000|8|49.64 s|dinâmico|[0.002m 0.009]|[10]
 40000|16|44.27 s|dinâmico|[0.002m 0.009]|[10]
-folha | grão 100 | --- | --- | --- |--- |
+
+folha grão 100
+BUDGET|THREADS|TIPO ESCALONAMENTO|TEMPO EXECUÇÃO|MC INTERVAL (sec)|NÚMERO AÇÕES|
+--- | --- | --- | --- | --- |--- |
 40000|1|164.50 s|dinâmico|[0.002m 0.009]|[10]
 40000|2|82.45 s|dinâmico|[0.002m 0.009]|[10]
 40000|3|54.89 s|dinâmico|[0.002m 0.009]|[10]
